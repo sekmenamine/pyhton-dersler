@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonuçlar - Kalori Hesaplayıcı</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="result-header">
+            <h2>Toplam Alınan Kalori</h2>
+            <div class="total-badge">{{ total_calories }} kcal</div>
+        </div>
+
+        {% if total_calories > 0 %}
+        <div class="weight-info">
+            <h3>⚠️ Kilo Etkisi</h3>
+            <p class="weight-gain-text">
+                Bu öğün, eğer yakılmazsa vücuduna yaklaşık <strong>{{ weight_gain }} kg</strong> olarak geri dönebilir!
+                <br>
+                <small>(Not: 770 kcal ≈ 1 kg yağ olarak hesaplanmıştır. Gerçek değerler metabolizmaya, yaşa ve cinsiyete göre değişebilir.)</small>
+            </p>
+        </div>
+
+        <h3 style="text-align: center; margin-top: 2rem; color: var(--dark-text);">Bunu Yakmak İçin Ne Yapmalı?</h3>
+        
+        <div class="suggestion-grid">
+            {% for exercise in exercises %}
+            <div class="suggestion-card">
+                <div class="suggestion-icon">{{ exercise.icon }}</div>
+                <div class="suggestion-text">
+                    <strong>{{ exercise.name }}</strong> yaparak<br>
+                    yaklaşık <strong>{{ exercise.hours }} saat</strong> harcaman gerekebilir.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 2rem;">
+            <h3>Henüz bir şey seçmedin gibi görünüyor!</h3>
+        </div>
+        {% endif %}
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="/" class="back-btn">← Tekrar Hesapla</a>
+        </div>
+
+        <div class="footer">
+            <p>Made with <span class="heart">❤</span> by <strong>Amine Sekmenoğlu</strong></p>
+            <p>&copy; 2025 Tüm Hakları Saklıdır</p>
+        </div>
+    </div>
+</body>
+</html>
+

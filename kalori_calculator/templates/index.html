@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lezzetli Kalori Hesaplayıcı</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Bugün Neler Yedin?</h1>
+        
+        <form action="/result" method="POST">
+            <div class="food-grid">
+                {% for food in foods %}
+                <div class="food-card">
+                    <input type="checkbox" id="food-{{ food.id }}" name="food_selection" value="{{ food.id }}">
+                    <label for="food-{{ food.id }}">
+                        <img src="{{ food.image }}" alt="{{ food.name }}" class="food-image">
+                        <div class="food-info">
+                            <div class="food-name">{{ food.name }}</div>
+                            <div class="food-calories">{{ food.calories }} kcal</div>
+                        </div>
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="submit-btn">Sonucu Göster</button>
+        </form>
+
+        <div class="footer">
+            <p>Made with <span class="heart">❤</span> by <strong>Amine Sekmenoğlu</strong></p>
+            <p>&copy; 2025 Tüm Hakları Saklıdır</p>
+        </div>
+    </div>
+</body>
+</html>
+
